@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p><input type="text" id="D1" name="D1" placeholder="종목 이름"></p>
+    <button onclick="ROA_ROE()">ROA, ROE, 부채비율 변화 추세</button><br><br>
+    <button onclick="modified_stock_price()">EMA를 사용하여 수정주가 예측</button><br><br>
+    <button onclick="rank()">재무지표에 따른 기업 랭킹 확인</button><br><br>
+    <button onclick="plusmenu()">추가 메뉴</button><br><br>
+</body>
+
+<script>
+    function ROA_ROE() {
+        var inputText = document.getElementById('D1').value;
+        window.location.href = "/ROA-ROE?D1=" + encodeURIComponent(inputText);
+    }
+
+    function modified_stock_price() {
+        var inputText = document.getElementById('D1').value;
+        window.location.href = "/modified-stock-price?D1=" + encodeURIComponent(inputText);
+    }
+
+    function rank() {
+        window.location.href = "/rank";
+    }
+    
+    function plusmenu() {
+        window.location.href = "/#";
+    }
+    
+    function plusmenu() {
+        window.location.href = "/#";
+    }
+</script>
+</html>

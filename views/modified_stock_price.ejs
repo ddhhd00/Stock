@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <%- data1 %> <br><br>
+    지난 12달 동안 수정 주가 변동
+    <canvas id="myChart" style="margin-right: 800px; width: 80px; height: 40px;"></canvas><br><br>
+
+    한달 뒤의 수정 주가 변동 예측
+    <canvas id="predictionChart" style="margin-right: 800px; width: 80px; height: 40px;"></canvas>
+</body>
+<script>
+    var data2 = <%- JSON.stringify(data2) %>;
+    var predi = <%- JSON.stringify(predi) %>; // 예측 값
+
+    var months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
+
+    // 원래 데이터를 가지고 그래프 생성
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: '가격',
+                data: data2,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // 예측 값을 가지고 그래프 생성
+    var predictionData = data2.concat(predi); // 예측 값을 데이터 배열에 추가
+    var predictionMonths = months.concat("다음 달"); // 레이블에 "다음 달" 추가
+
+    var predictionCtx = document.getElementById('predictionChart').getContext('2d');
+    var predictionChart = new Chart(predictionCtx, {
+        type: 'line',
+        data: {
+            labels: predictionMonths,
+            datasets: [{
+                label: '가격',
+                data: predictionData,
+                fill: false,
+                borderColor: 'rgb(192, 75, 75)', // 다른 색상을 사용
+                tension: 0.1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</html>
